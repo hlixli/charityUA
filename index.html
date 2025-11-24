@@ -13,12 +13,12 @@
 
   <style>
     :root {
-      /* --- Core Palette (Light/Sharp) --- */
+      /* --- Core Palette --- */
       --bg-page: #ffffff;
-      --bg-panel: #f4f4f5; /* Трохи холодніший відтінок сірого */
+      --bg-panel: #f4f4f5;
       
       --border-color: #e5e7eb;
-      --border-strong: #18181b; /* Майже чорний */
+      --border-strong: #18181b;
       
       /* --- Text Colors --- */
       --text-main: #09090b;  
@@ -28,6 +28,9 @@
       --color-books: #7c3aed; 
       --color-army: #4d7c0f;  
       
+      /* --- Dynamic Color --- */
+      --active-color: var(--color-army); /* Default start color */
+
       /* --- Layout Variables --- */
       --container-width: 1100px;
       
@@ -43,6 +46,10 @@
       --shadow-hover: 6px 6px 0px rgba(0,0,0,0.15);
     }
 
+    /* --- Mode Logic for Colors --- */
+    body.mode-army { --active-color: var(--color-army); }
+    body.mode-books { --active-color: var(--color-books); }
+
     /* --- Reset --- */
     * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
     body {
@@ -52,6 +59,7 @@
       font-family: var(--font-body);
       overflow-x: hidden;
       line-height: 1.5;
+      transition: background-color 0.3s;
     }
     
     a { text-decoration: none; color: inherit; transition: 0.2s; }
@@ -63,9 +71,8 @@
     .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
     .text-tech { font-family: var(--font-tech); text-transform: uppercase; letter-spacing: -0.5px; }
     
-    /* --- Mobile Optimization Utility --- */
     @media (max-width: 768px) {
-      .container { padding: 0 16px; } /* Compact side padding for mobile */
+      .container { padding: 0 16px; }
     }
 
     /* --- Background Ambient --- */
@@ -74,8 +81,8 @@
       filter: blur(140px); opacity: 0.12; z-index: -1; pointer-events: none;
       transition: background-color 1.2s ease;
     }
-    .glow-top { top: -30%; left: 50%; transform: translateX(-50%); background: var(--color-books); }
-    .glow-btm { bottom: -30%; left: 50%; transform: translateX(-50%); background: var(--color-army); }
+    .glow-top { top: -30%; left: 50%; transform: translateX(-50%); background: var(--active-color); }
+    .glow-btm { bottom: -30%; left: 50%; transform: translateX(-50%); background: var(--active-color); }
 
     /* --- Header --- */
     header {
@@ -103,9 +110,8 @@
       box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
     }
 
-    /* --- Hero Section (Optimized Spacing) --- */
+    /* --- Hero Section --- */
     .hero { 
-      /* Desktop Spacing: Airy */
       padding: 80px 0 60px; 
       text-align: center; 
     }
@@ -123,20 +129,21 @@
       font-weight: 500;
     }
 
-    /* Mobile Hero Override */
     @media (max-width: 768px) {
-      .hero { 
-        /* Mobile Spacing: Compact */
-        padding: 40px 0 32px; 
-      }
+      .hero { padding: 40px 0 32px; }
       .hero h1 { margin-bottom: 16px; }
       .hero p { font-size: 1rem; margin-bottom: 30px; line-height: 1.5; }
     }
 
-    .hero-highlight { position: relative; display: inline-block; padding: 0 4px; z-index: 1; }
+    /* Highlight Logic */
+    .hero-span {
+      position: relative; display: inline-block; padding: 0 4px; z-index: 1;
+      transition: color 0.3s;
+    }
+    /* Цей клас додається JS-ом до потрібного фрагменту */
     .hero-highlight::after {
       content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 35%;
-      background: var(--color-books); opacity: 0.25; z-index: -1; 
+      background: var(--active-color); opacity: 0.25; z-index: -1; 
       transition: background 0.5s;
     }
 
@@ -163,10 +170,7 @@
       display: flex; flex-direction: column; justify-content: center;
       min-height: 100px;
     }
-    /* Mobile Stat Cell - Tighter padding */
-    @media (max-width: 768px) { 
-      .stat-cell { padding: 16px 20px; min-height: auto; } 
-    }
+    @media (max-width: 768px) { .stat-cell { padding: 16px 20px; min-height: auto; } }
 
     .stat-label {
       font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
@@ -181,9 +185,8 @@
     .stat-main { background: #fafafa; position: relative; }
     .stat-main::before {
       content:''; position: absolute; top:0; left:0; width: 4px; height: 100%;
-      background: var(--color-books); transition: background 0.5s;
+      background: var(--active-color); transition: background 0.5s;
     }
-    .mode-army .stat-main::before { background: var(--color-army); }
 
     /* --- Tab Switcher --- */
     .switcher {
@@ -200,6 +203,8 @@
       border-right: 1px solid var(--border-color);
     }
     .switch-btn:last-child { border-right: none; }
+    
+    /* Active State for Buttons */
     .switch-btn.active { background: var(--text-main); color: #fff; }
     .mode-army .switch-btn.active { background: var(--color-army); }
     .mode-books .switch-btn.active { background: var(--color-books); }
@@ -223,20 +228,12 @@
     }
     @media (max-width: 850px) { .card-layout { grid-template-columns: 1fr; } }
 
-    /* Card Padding Management */
     .card-info { padding: 40px; border-right: 1px solid var(--border-color); }
     .fund-stats { padding: 40px; background: var(--bg-panel); display: flex; flex-direction: column; justify-content: center; }
 
-    /* Mobile Card Padding Override */
     @media (max-width: 850px) {
-      .card-info { 
-        padding: 30px 20px; /* Less horizontal padding */
-        border-right: none; 
-        border-bottom: 1px solid var(--border-color); 
-      }
-      .fund-stats { 
-        padding: 30px 20px; 
-      }
+      .card-info { padding: 30px 20px; border-right: none; border-bottom: 1px solid var(--border-color); }
+      .fund-stats { padding: 30px 20px; }
       .card-info h2 { font-size: 1.8rem; margin-bottom: 16px; }
     }
 
@@ -260,28 +257,21 @@
       height: 14px; background: #e5e5e5; border: 1px solid #d4d4d4;
       border-radius: var(--radius-none); overflow: hidden; margin: 20px 0;
     }
-    .progress-bar { height: 100%; width: 0%; transition: width 1.5s ease; }
+    .progress-bar { height: 100%; width: 0%; transition: width 1.5s ease; background: var(--active-color); }
     
     .btn-donate {
       width: 100%; padding: 18px; 
       border: 2px solid transparent; border-radius: var(--radius-none);
       font-family: var(--font-tech); font-weight: 700; font-size: 1rem;
       text-transform: uppercase; cursor: pointer; margin-top: 8px;
-      transition: all 0.2s; color: #fff;
+      transition: all 0.2s; color: #fff; background: var(--active-color);
     }
     .btn-donate:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
     .btn-donate:active { transform: translateY(0); }
 
-    /* Theme Colors */
-    .theme-books .progress-bar { background: var(--color-books); }
-    .theme-books .btn-donate { background: var(--color-books); }
-    .theme-books h2 span { color: var(--color-books); }
-    .theme-books .check-list i { color: var(--color-books); font-size: 1.2rem; }
-
-    .theme-army .progress-bar { background: var(--color-army); }
-    .theme-army .btn-donate { background: var(--color-army); }
-    .theme-army h2 span { color: var(--color-army); }
-    .theme-army .check-list i { color: var(--color-army); font-size: 1.2rem; }
+    /* Specific Elements Coloring based on Active Theme */
+    .card-info h2 span { color: var(--active-color); }
+    .check-list i { color: var(--active-color); font-size: 1.2rem; }
 
     /* --- Social Grid --- */
     .social-section { 
@@ -346,14 +336,17 @@
           <circle cx="50" cy="50" r="28" fill="#FFFFFF" />
           <circle cx="50" cy="50" r="13" fill="#FDD858" />
         </svg>
-        <div>БО <span id="logoText" style="color: var(--color-army)">«БФ СВІТОГЛЯД»</span></div>
+        <div>БО <span id="logoText" style="color: var(--active-color); transition: color 0.3s;">«БФ СВІТОГЛЯД»</span></div>
       </a>
       <a href="#donate-anchor" class="btn-small">ПІДТРИМАТИ</a>
     </div>
   </header>
 
   <section class="hero container">
-    <h1>Майбутнє дітей.<br><span class="hero-highlight" id="heroText">Захист держави.</span></h1>
+    <h1>
+        <span id="hero-txt-books" class="hero-span">Майбутнє дітей.</span><br>
+        <span id="hero-txt-army" class="hero-span hero-highlight">Захист держави.</span>
+    </h1>
     <p>Офіційний фонд. Поєднуємо гуманітарні та мілітарні ініціативи. Ефективна конвертація вашої довіри в результат.</p>
   </section>
 
@@ -396,7 +389,7 @@
 
     <div class="content-wrapper">
       
-      <div id="card-army" class="project-card theme-army active">
+      <div id="card-army" class="project-card active">
         <div class="card-layout">
           <div class="card-info">
             <span class="tag">#ТЕХНОЛОГІЇ #ЗСУ</span>
@@ -422,7 +415,7 @@
             
             <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted);">
               <span>Ціль: 50 000 ₴</span>
-              <span style="font-weight:700; color: var(--color-army);">1%</span>
+              <span style="font-weight:700; color: var(--active-color);">1%</span>
             </div>
 
             <a href="https://send.monobank.ua/jar/YOUR_PLASTIC_JAR_LINK" target="_blank">
@@ -432,7 +425,7 @@
         </div>
       </div>
 
-      <div id="card-books" class="project-card theme-books">
+      <div id="card-books" class="project-card">
         <div class="card-layout">
           <div class="card-info">
             <span class="tag">#ОСВІТА #ДІТИ</span>
@@ -459,7 +452,7 @@
             
             <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted);">
               <span>Ціль: 50 000 ₴</span>
-              <span style="font-weight:700; color: var(--color-books);">72%</span>
+              <span style="font-weight:700; color: var(--active-color);">72%</span>
             </div>
 
             <a href="https://send.monobank.ua/jar/YOUR_BOOK_JAR_LINK" target="_blank">
@@ -527,24 +520,38 @@
     function setMode(mode) {
       const body = document.body;
       const logoIcon = document.getElementById('logoIcon');
-      const logoText = document.getElementById('logoText');
       
+      // 1. Зміна класу Body (змінює CSS змінні кольорів автоматично)
       body.classList.remove('mode-books', 'mode-army');
       body.classList.add('mode-' + mode);
 
+      // 2. Перемикання кнопок та карток
       document.querySelectorAll('.switch-btn').forEach(btn => btn.classList.remove('active'));
       event.currentTarget.classList.add('active');
 
       document.querySelectorAll('.project-card').forEach(card => card.classList.remove('active'));
       document.getElementById('card-' + mode).classList.add('active');
-
-      const activeColor = (mode === 'army') ? 'var(--color-army)' : 'var(--color-books)';
       
+      // 3. Зміна кольору лого (SVG)
+      const activeColor = (mode === 'army') ? 'var(--color-army)' : 'var(--color-books)';
       logoIcon.style.color = activeColor;
-      logoText.style.color = activeColor;
-      document.querySelector('.hero-highlight').style.setProperty('--color-books', activeColor);
+
+      // 4. Логіка перемикання підсвічування тексту в Hero
+      const txtBooks = document.getElementById('hero-txt-books');
+      const txtArmy = document.getElementById('hero-txt-army');
+
+      if (mode === 'books') {
+        // Якщо Книги: підсвічуємо верхній рядок, знімаємо з нижнього
+        txtBooks.classList.add('hero-highlight');
+        txtArmy.classList.remove('hero-highlight');
+      } else {
+        // Якщо Армія: підсвічуємо нижній рядок, знімаємо з верхнього
+        txtArmy.classList.add('hero-highlight');
+        txtBooks.classList.remove('hero-highlight');
+      }
     }
 
+    // Анімація цифр
     function animateValue(obj, start, end, duration) {
       let startTimestamp = null;
       const step = (timestamp) => {
@@ -562,9 +569,10 @@
       const plasticEl = document.getElementById("plastic-counter");
       if(plasticEl) animateValue(plasticEl, 0, 196, 2000);
       
+      // Ініціалізація кольору лого при завантаженні
       const isArmy = document.body.classList.contains('mode-army');
-      const startColor = isArmy ? 'var(--color-army)' : 'var(--color-books)';
-      document.querySelector('.hero-highlight').style.setProperty('--color-books', startColor);
+      const logoIcon = document.getElementById('logoIcon');
+      logoIcon.style.color = isArmy ? 'var(--color-army)' : 'var(--color-books)';
     });
   </script>
 </body>
