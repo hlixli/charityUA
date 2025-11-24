@@ -269,6 +269,44 @@
     .btn-donate:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
     .btn-donate:active { transform: translateY(0); }
 
+    /* --- Requisites Block Styles (NEW) --- */
+    .req-block {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px dashed #d4d4d8;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .req-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .req-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 6px; flex-wrap: wrap; gap: 8px;
+    }
+    .req-row strong {
+      color: var(--text-main);
+      text-align: right;
+    }
+    .req-row.col {
+      flex-direction: column; align-items: flex-start; gap: 2px; margin-bottom: 10px;
+    }
+    .req-row.col strong {
+      text-align: left;
+      font-family: var(--font-tech);
+      background: #e4e4e7;
+      padding: 4px 8px;
+      border-radius: 2px;
+      word-break: break-all; /* Ensures IBAN wraps on mobile */
+      width: 100%;
+    }
+
     /* Specific Elements Coloring based on Active Theme */
     .card-info h2 span { color: var(--active-color); }
     .check-list i { color: var(--active-color); font-size: 1.2rem; }
@@ -424,7 +462,36 @@
             <a href="https://send.monobank.ua/jar/YOUR_PLASTIC_JAR_LINK" target="_blank">
               <button class="btn-donate">Донат на пластик</button>
             </a>
-          </div>
+
+            <div class="req-block">
+                <div class="req-title">Реквізити (UAH):</div>
+                
+                <div class="req-row">
+                    <span>Отримувач:</span>
+                    <strong>БФ СВІТОГЛЯД БО</strong>
+                </div>
+                
+                <div class="req-row">
+                    <span>ЄДРПОУ:</span>
+                    <strong class="text-tech">44659520</strong>
+                </div>
+                
+                <div class="req-row">
+                    <span>Банк:</span>
+                    <strong>УНІВЕРСАЛ БАНК</strong>
+                </div>
+
+                <div class="req-row col">
+                    <span>IBAN:</span>
+                    <strong class="text-tech">UA453220010000026008700007173</strong>
+                </div>
+                
+                <div class="req-row">
+                    <span>Призначення:</span>
+                    <strong>Благодійний внесок</strong>
+                </div>
+            </div>
+            </div>
         </div>
       </div>
 
@@ -580,5 +647,3 @@
   </script>
 </body>
 </html>
-
-
