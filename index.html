@@ -15,25 +15,23 @@
     :root {
       /* --- Core Palette (Light/Sharp) --- */
       --bg-page: #ffffff;
-      --bg-panel: #f2f2f0; /* Технічний світлий */
-      --bg-accent: #e5e7eb;
+      --bg-panel: #f4f4f5; /* Трохи холодніший відтінок сірого */
       
-      --border-color: #d1d5db;
-      --border-strong: #111827; /* Майже чорний для акцентів */
+      --border-color: #e5e7eb;
+      --border-strong: #18181b; /* Майже чорний */
       
       /* --- Text Colors --- */
-      --text-main: #111827;  /* Темно-сірий/Чорний */
-      --text-muted: #6b7280; /* Середній сірий */
-      --text-on-dark: #ffffff;
+      --text-main: #09090b;  
+      --text-muted: #71717a; 
 
       /* --- Brand Colors --- */
-      --color-books: #7c3aed; /* Насичений фіолетовий */
-      --color-army: #4d7c0f;  /* Глибокий оливковий */
-      --color-army-light: #ecfccb;
+      --color-books: #7c3aed; 
+      --color-army: #4d7c0f;  
       
       /* --- Layout Variables --- */
       --container-width: 1100px;
-      /* Гострі кути для строгого дизайну */
+      
+      /* Sharp Design */
       --radius-none: 0px; 
       --radius-sm: 2px;
       
@@ -41,8 +39,8 @@
       --font-head: 'Space Grotesk', sans-serif;
       --font-body: 'Manrope', sans-serif;
 
-      --shadow-soft: 0 4px 20px rgba(0,0,0,0.05);
       --shadow-sharp: 4px 4px 0px rgba(0,0,0,0.1);
+      --shadow-hover: 6px 6px 0px rgba(0,0,0,0.15);
     }
 
     /* --- Reset --- */
@@ -62,41 +60,39 @@
     button { font-family: var(--font-head); cursor: pointer; }
 
     /* --- Utilities --- */
-    .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+    .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
     .text-tech { font-family: var(--font-tech); text-transform: uppercase; letter-spacing: -0.5px; }
-    .hidden-mobile { display: block; }
     
+    /* --- Mobile Optimization Utility --- */
     @media (max-width: 768px) {
-      .hidden-mobile { display: none !important; }
-      .container { padding: 0 16px; }
+      .container { padding: 0 16px; } /* Compact side padding for mobile */
     }
 
-    /* --- Background Ambient (Subtle in Light Mode) --- */
+    /* --- Background Ambient --- */
     .glow-spot {
-      position: fixed; width: 60vw; height: 60vw; border-radius: 50%;
-      filter: blur(120px); opacity: 0.15; z-index: -1; pointer-events: none;
+      position: fixed; width: 80vw; height: 80vw; border-radius: 50%;
+      filter: blur(140px); opacity: 0.12; z-index: -1; pointer-events: none;
       transition: background-color 1.2s ease;
     }
-    .glow-top { top: -20%; left: 50%; transform: translateX(-50%); background: var(--color-books); }
-    .glow-btm { bottom: -20%; left: 50%; transform: translateX(-50%); background: var(--color-army); }
+    .glow-top { top: -30%; left: 50%; transform: translateX(-50%); background: var(--color-books); }
+    .glow-btm { bottom: -30%; left: 50%; transform: translateX(-50%); background: var(--color-army); }
 
     /* --- Header --- */
     header {
       border-bottom: 1px solid var(--border-color);
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
       position: sticky; top: 0; z-index: 100;
-      padding: 16px 0;
+      padding: 14px 0;
     }
     .nav-row { display: flex; justify-content: space-between; align-items: center; }
     .logo {
-      font-size: 1.2rem; font-weight: 800; display: flex; align-items: center; gap: 10px;
+      font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 8px;
       letter-spacing: -0.03em;
     }
-    .logo span { transition: color 0.5s; }
     
     .btn-small {
-      font-size: 0.85rem; font-weight: 700; padding: 10px 20px;
+      font-size: 0.8rem; font-weight: 700; padding: 8px 18px;
       border: 1px solid var(--border-strong); 
       border-radius: var(--radius-none);
       background: var(--text-main); color: #fff;
@@ -104,139 +100,120 @@
     }
     .btn-small:hover { 
       background: transparent; color: var(--text-main);
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
     }
 
-    /* --- Hero Section --- */
-    .hero { padding: 80px 0 60px; text-align: center; }
+    /* --- Hero Section (Optimized Spacing) --- */
+    .hero { 
+      /* Desktop Spacing: Airy */
+      padding: 80px 0 60px; 
+      text-align: center; 
+    }
     .hero h1 { 
-      font-size: clamp(2.5rem, 7vw, 5rem); 
-      line-height: 1; 
+      font-size: clamp(2.2rem, 6vw, 4.5rem); 
+      line-height: 1.1; 
       margin-bottom: 24px;
       letter-spacing: -0.04em;
     }
     .hero p { 
       color: var(--text-muted); 
-      max-width: 520px; 
+      max-width: 540px; 
       margin: 0 auto 40px; 
-      font-size: 1.15rem; 
+      font-size: 1.1rem; 
       font-weight: 500;
     }
-    .hero-highlight { 
-      position: relative; 
-      display: inline-block; 
-      z-index: 1;
-      padding: 0 5px;
+
+    /* Mobile Hero Override */
+    @media (max-width: 768px) {
+      .hero { 
+        /* Mobile Spacing: Compact */
+        padding: 40px 0 32px; 
+      }
+      .hero h1 { margin-bottom: 16px; }
+      .hero p { font-size: 1rem; margin-bottom: 30px; line-height: 1.5; }
     }
-    /* Marker effect */
+
+    .hero-highlight { position: relative; display: inline-block; padding: 0 4px; z-index: 1; }
     .hero-highlight::after {
-      content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 30%;
-      background: var(--color-books); opacity: 0.2; z-index: -1; 
-      border-radius: 0;
+      content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 35%;
+      background: var(--color-books); opacity: 0.25; z-index: -1; 
       transition: background 0.5s;
     }
 
-    /* --- StatStrip (Technical Grid) --- */
+    /* --- StatStrip --- */
     .stat-strip-container {
       margin-bottom: 80px;
       border-top: 1px solid var(--border-color);
       border-bottom: 1px solid var(--border-color);
       background: var(--bg-panel);
     }
+    @media (max-width: 768px) { .stat-strip-container { margin-bottom: 50px; } }
+
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1px;
-      background: var(--border-color); /* Lines between cells */
+      background: var(--border-color); 
       border-left: 1px solid var(--border-color);
       border-right: 1px solid var(--border-color);
     }
     .stat-cell {
       background: var(--bg-page);
       padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 110px;
+      display: flex; flex-direction: column; justify-content: center;
+      min-height: 100px;
     }
+    /* Mobile Stat Cell - Tighter padding */
+    @media (max-width: 768px) { 
+      .stat-cell { padding: 16px 20px; min-height: auto; } 
+    }
+
     .stat-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      font-family: var(--font-tech);
-      margin-bottom: 8px;
+      font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+      font-family: var(--font-tech); margin-bottom: 6px;
     }
     .stat-value-big {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--text-main);
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      letter-spacing: -0.03em;
+      font-size: 1.4rem; font-weight: 800; color: var(--text-main);
+      display: flex; align-items: baseline; gap: 6px;
     }
-    .stat-note {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 6px;
-      line-height: 1.3;
-    }
-    /* Highlight first cell */
-    .stat-main {
-      background: #fafafa;
-      position: relative;
-      overflow: hidden;
-    }
+    .stat-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
+    
+    .stat-main { background: #fafafa; position: relative; }
     .stat-main::before {
       content:''; position: absolute; top:0; left:0; width: 4px; height: 100%;
       background: var(--color-books); transition: background 0.5s;
     }
-    
     .mode-army .stat-main::before { background: var(--color-army); }
 
-    @media (max-width: 768px) {
-      .stat-cell { min-height: auto; padding: 20px; }
-    }
-
-    /* --- Tab Switcher (Sharp) --- */
+    /* --- Tab Switcher --- */
     .switcher {
-      display: inline-flex; 
-      background: transparent; 
+      display: flex; 
+      width: fit-content;
+      margin: 0 auto 40px; 
       border: 1px solid var(--border-color);
-      margin-bottom: 50px; 
-      position: relative; left: 50%; transform: translateX(-50%);
     }
     .switch-btn {
-      background: var(--bg-page); 
-      border: none; 
-      color: var(--text-muted);
-      padding: 14px 32px; 
-      cursor: pointer;
-      font-weight: 600; 
-      font-family: var(--font-head); 
-      transition: 0.2s;
-      display: flex; align-items: center; gap: 8px; font-size: 1rem;
+      background: var(--bg-page); border: none; color: var(--text-muted);
+      padding: 12px 24px; cursor: pointer;
+      font-weight: 600; font-family: var(--font-head); transition: 0.2s;
+      display: flex; align-items: center; gap: 8px; font-size: 0.95rem;
       border-right: 1px solid var(--border-color);
     }
     .switch-btn:last-child { border-right: none; }
-    
-    .switch-btn:hover { color: var(--text-main); background: #fafafa; }
-    
-    .switch-btn.active { 
-      background: var(--text-main); 
-      color: #fff; 
-    }
-    
+    .switch-btn.active { background: var(--text-main); color: #fff; }
     .mode-army .switch-btn.active { background: var(--color-army); }
     .mode-books .switch-btn.active { background: var(--color-books); }
-
-    /* --- Main Cards (Sharp & Clean) --- */
-    .content-wrapper { position: relative; min-height: 500px; }
-    .project-card {
-      display: none;
-      animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    @media (max-width: 500px) {
+      .switcher { width: 100%; }
+      .switch-btn { flex: 1; justify-content: center; padding: 12px; }
     }
+
+    /* --- Main Cards --- */
+    .content-wrapper { position: relative; min-height: 480px; }
+    .project-card { display: none; animation: slideUp 0.5s ease-out; }
     .project-card.active { display: block; }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
     .card-layout {
       display: grid; grid-template-columns: 1fr 1fr; gap: 0;
@@ -246,126 +223,119 @@
     }
     @media (max-width: 850px) { .card-layout { grid-template-columns: 1fr; } }
 
+    /* Card Padding Management */
     .card-info { padding: 40px; border-right: 1px solid var(--border-color); }
-    @media (max-width: 850px) { .card-info { border-right: none; border-bottom: 1px solid var(--border-color); } }
+    .fund-stats { padding: 40px; background: var(--bg-panel); display: flex; flex-direction: column; justify-content: center; }
 
-    .card-info h2 { font-size: 2.2rem; margin-bottom: 20px; letter-spacing: -0.03em; }
-    .card-info p { color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; font-size: 1.05rem; }
+    /* Mobile Card Padding Override */
+    @media (max-width: 850px) {
+      .card-info { 
+        padding: 30px 20px; /* Less horizontal padding */
+        border-right: none; 
+        border-bottom: 1px solid var(--border-color); 
+      }
+      .fund-stats { 
+        padding: 30px 20px; 
+      }
+      .card-info h2 { font-size: 1.8rem; margin-bottom: 16px; }
+    }
+
+    .card-info h2 { font-size: 2.2rem; margin-bottom: 20px; letter-spacing: -0.02em; }
+    .card-info p { color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; font-size: 1.05rem; }
     
     .tag {
-      display: inline-block; padding: 6px 12px; 
-      font-size: 0.75rem; font-family: var(--font-tech); font-weight: 600;
+      display: inline-block; padding: 5px 10px; 
+      font-size: 0.7rem; font-family: var(--font-tech); font-weight: 700;
       background: var(--bg-panel); color: var(--text-main); 
       border: 1px solid var(--border-color);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .check-list li {
       display: flex; align-items: center; gap: 12px;
-      margin-bottom: 12px; color: var(--text-main); font-weight: 500;
+      margin-bottom: 12px; color: var(--text-main); font-weight: 600; font-size: 0.95rem;
     }
-    .check-list i { font-size: 1.2rem; }
-
-    /* Stats inside card */
-    .fund-stats {
-      padding: 40px; 
-      background: var(--bg-panel);
-      display: flex; flex-direction: column; justify-content: center;
-    }
-    
-    .progress-container { margin: 25px 0; }
     
     .progress-track {
-      height: 16px; background: #e5e5e5; border: 1px solid #d4d4d4;
-      border-radius: var(--radius-none);
-      overflow: hidden;
+      height: 14px; background: #e5e5e5; border: 1px solid #d4d4d4;
+      border-radius: var(--radius-none); overflow: hidden; margin: 20px 0;
     }
-    .progress-bar { height: 100%; width: 0%; transition: width 1.5s ease; border-radius: 0; }
+    .progress-bar { height: 100%; width: 0%; transition: width 1.5s ease; }
     
     .btn-donate {
-      width: 100%; padding: 20px; 
-      border: 2px solid transparent; 
-      border-radius: var(--radius-none);
-      font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem;
-      text-transform: uppercase; cursor: pointer; margin-top: 10px;
+      width: 100%; padding: 18px; 
+      border: 2px solid transparent; border-radius: var(--radius-none);
+      font-family: var(--font-tech); font-weight: 700; font-size: 1rem;
+      text-transform: uppercase; cursor: pointer; margin-top: 8px;
       transition: all 0.2s; color: #fff;
     }
-    .btn-donate:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .btn-donate:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
     .btn-donate:active { transform: translateY(0); }
 
-    /* Theme Specifics inside Card */
+    /* Theme Colors */
     .theme-books .progress-bar { background: var(--color-books); }
     .theme-books .btn-donate { background: var(--color-books); }
     .theme-books h2 span { color: var(--color-books); }
-    .theme-books .check-list i { color: var(--color-books); }
+    .theme-books .check-list i { color: var(--color-books); font-size: 1.2rem; }
 
     .theme-army .progress-bar { background: var(--color-army); }
     .theme-army .btn-donate { background: var(--color-army); }
     .theme-army h2 span { color: var(--color-army); }
-    .theme-army .check-list i { color: var(--color-army); }
+    .theme-army .check-list i { color: var(--color-army); font-size: 1.2rem; }
 
     /* --- Social Grid --- */
-    .social-section { padding: 80px 0; background: var(--bg-panel); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
-    .social-header { text-align: center; margin-bottom: 50px; font-size: 2rem; letter-spacing: -0.03em;}
+    .social-section { 
+      padding: 80px 0; 
+      background: var(--bg-panel); 
+      border-top: 1px solid var(--border-color); 
+      border-bottom: 1px solid var(--border-color); 
+    }
+    @media (max-width: 768px) { .social-section { padding: 50px 0; } }
+
+    .social-header { text-align: center; margin-bottom: 40px; font-size: 1.8rem; }
     
     .social-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      justify-content: center;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; justify-content: center;
     }
     .social-card {
       background: var(--bg-page);
       border: 1px solid var(--border-color);
-      padding: 30px;
+      padding: 24px;
       border-radius: var(--radius-none);
       transition: 0.3s;
-      box-shadow: var(--shadow-soft);
     }
-    .social-card:hover { border-color: var(--border-strong); transform: translateY(-5px); box-shadow: var(--shadow-sharp); }
+    .social-card:hover { border-color: var(--border-strong); transform: translateY(-4px); box-shadow: var(--shadow-sharp); }
     
-    .brand-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; font-family: var(--font-head); }
+    .brand-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
     
     .link-list a {
       display: flex; align-items: center; gap: 12px;
-      padding: 14px; margin-bottom: 10px; 
-      border: 1px solid transparent;
+      padding: 12px; margin-bottom: 8px; 
       background: #f9fafb; color: var(--text-main);
-      font-weight: 600; font-size: 0.95rem;
+      font-weight: 600; font-size: 0.9rem;
+      border: 1px solid transparent;
       transition: 0.2s;
     }
     .link-list a:hover { 
-      background: #fff; 
-      border-color: var(--border-color);
-      color: #000;
+      background: #fff; border-color: var(--border-color);
       box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
     }
-    .link-list i { font-size: 1.3rem; color: var(--text-muted); }
 
     /* --- Footer --- */
     footer {
-      padding: 60px 0;
-      color: var(--text-muted); font-size: 0.9rem;
-      background: #f9f9f9;
+      padding: 50px 0;
+      color: var(--text-muted); font-size: 0.85rem;
+      background: #fdfdfd;
     }
-    .footer-content {
-      display: flex; flex-direction: column;
-      align-items: center; text-align: center; gap: 20px;
-    }
-    .legal-text { 
-      font-family: var(--font-tech); 
-      font-size: 0.7rem; 
-      opacity: 0.8; 
-      line-height: 1.7; 
-      max-width: 800px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .footer-logo { font-size: 1.5rem; color: var(--text-main); opacity: 0.3; }
+    .footer-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+    .legal-text { font-family: var(--font-tech); font-size: 0.65rem; opacity: 0.7; line-height: 1.6; text-transform: uppercase; }
 
   </style>
 </head>
-<body class="mode-army"> <div class="glow-spot glow-top" id="topLight"></div>
+<body class="mode-army">
+
+  <div class="glow-spot glow-top" id="topLight"></div>
   <div class="glow-spot glow-btm" id="btmLight"></div>
 
   <header>
@@ -389,22 +359,22 @@
         <div class="stat-cell stat-main">
           <span class="stat-label">ПЛАСТИК ДЛЯ ЗСУ</span>
           <span class="stat-value-big" id="plastic-counter">196 КГ</span>
-          <span class="stat-note">Фактично передано матеріалу інженерам</span>
+          <span class="stat-note">Передано інженерам</span>
         </div>
         <div class="stat-cell">
           <span class="stat-label">СПІЛЬНОТА</span>
           <span class="stat-value-big">21+</span>
-          <span class="stat-note">Активних волонтерів та донаторів</span>
+          <span class="stat-note">Волонтерів та донаторів</span>
         </div>
         <div class="stat-cell">
-          <span class="stat-label">СУМА ВНЕСКУ</span>
+          <span class="stat-label">ВНЕСОК</span>
           <span class="stat-value-big">≤ 1000 ₴</span>
-          <span class="stat-note">Комфортний донат від 1000 ₴</span>
+          <span class="stat-note">Комфортний донат</span>
         </div>
         <div class="stat-cell">
           <span class="stat-label">МЕТА</span>
           <span class="stat-value-big">ПЕРЕМОГА</span>
-          <span class="stat-note">Освіта для дітей та дрони для захисту</span>
+          <span class="stat-note">Освіта та захист</span>
         </div>
       </div>
     </div>
@@ -428,17 +398,17 @@
             <span class="tag">#ТЕХНОЛОГІЇ #ЗСУ</span>
             <h2>Пластик для <span>Дронів</span></h2>
             <p>
-              Збираємо кошти на закупівлю інженерного пластику (PETG/PLA) для 3D-друку. Ми співпрацюємо безпосередньо з майстернями підрозділів. Ваш донат перетворюється на хвостовики, корпуси скидів та кріплення для "пташок".
+              Збираємо кошти на закупівлю інженерного пластику (PETG/PLA) для 3D-друку. Ми співпрацюємо безпосередньо з майстернями підрозділів. Ваш донат перетворюється на хвостовики та корпуси для "пташок".
             </p>
-            <div style="background: var(--bg-panel); padding: 20px; border: 1px solid var(--border-color); border-left: 4px solid var(--color-army);">
-              <strong style="color: var(--text-main); display:block; margin-bottom:5px; font-family: var(--font-tech);">СТАТИСТИКА:</strong>
-              <span style="font-size: 0.95rem; color: var(--text-muted);">Передано понад <span style="color:var(--text-main); font-weight:700;">196 кг</span> пластику. Це тисячі надрукованих деталей.</span>
+            <div style="background: var(--bg-panel); padding: 16px; border: 1px solid var(--border-color); border-left: 4px solid var(--color-army);">
+              <strong style="color: var(--text-main); display:block; margin-bottom:5px; font-family: var(--font-tech); font-size: 0.8rem;">ЗВІТНІСТЬ:</strong>
+              <span style="font-size: 0.9rem; color: var(--text-muted);">Передано понад <span style="color:var(--text-main); font-weight:700;">196 кг</span> пластику.</span>
             </div>
           </div>
 
           <div class="fund-stats">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px; align-items:flex-end;">
-              <span style="font-weight:700; font-size:1.2rem; font-family: var(--font-head);">Бюджет збору</span>
+            <div style="display:flex; justify-content:space-between; margin-bottom:5px; align-items:flex-end;">
+              <span style="font-weight:700; font-size:1.1rem; font-family: var(--font-head);">Бюджет</span>
               <span class="text-tech" style="color:var(--text-main); font-weight:700;">0 ₴</span>
             </div>
             
@@ -446,13 +416,13 @@
               <div class="progress-bar" style="width: 1%;"></div>
             </div>
             
-            <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted); margin-top: 8px;">
-              <span>Потреба: 50 000 ₴</span>
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted);">
+              <span>Ціль: 50 000 ₴</span>
               <span style="font-weight:700; color: var(--color-army);">1%</span>
             </div>
 
             <a href="https://send.monobank.ua/jar/YOUR_PLASTIC_JAR_LINK" target="_blank">
-              <button class="btn-donate">Задонатити на пластик</button>
+              <button class="btn-donate">Донат на пластик</button>
             </a>
           </div>
         </div>
@@ -464,18 +434,18 @@
             <span class="tag">#ОСВІТА #ДІТИ</span>
             <h2>Ініціатива <span>«Скарбоня книжок»</span></h2>
             <p>
-              Ми наповнюємо бібліотеки дитячих будинків сучасною українською літературою. Якісна книга формує світогляд. Кожен внесок — це казки, енциклопедії та розвиваючі ігри для дітей, позбавлених батьківського піклування.
+              Ми наповнюємо бібліотеки дитячих будинків сучасною літературою. Кожен внесок — це казки, енциклопедії та розвиваючі ігри для дітей, позбавлених батьківського піклування.
             </p>
             <ul class="check-list">
-              <li><i class="ph-bold ph-check"></i> Закупівля виключно українських видань</li>
-              <li><i class="ph-bold ph-check"></i> Пряма логістика до інтернатів</li>
-              <li><i class="ph-bold ph-check"></i> Повні фотозвіти кожної передачі</li>
+              <li><i class="ph-bold ph-check"></i> Українські видання</li>
+              <li><i class="ph-bold ph-check"></i> Логістика до інтернатів</li>
+              <li><i class="ph-bold ph-check"></i> Фотозвіти передач</li>
             </ul>
           </div>
 
           <div class="fund-stats">
-            <div style="display:flex; justify-content:space-between; margin-bottom:10px; align-items:flex-end;">
-              <span style="font-weight:700; font-size:1.2rem; font-family: var(--font-head);">Зібрано коштів</span>
+            <div style="display:flex; justify-content:space-between; margin-bottom:5px; align-items:flex-end;">
+              <span style="font-weight:700; font-size:1.1rem; font-family: var(--font-head);">Зібрано</span>
               <span class="text-tech" style="color:var(--text-main); font-weight:700;">36 400 ₴</span>
             </div>
             
@@ -483,7 +453,7 @@
               <div class="progress-bar" style="width: 72%;"></div>
             </div>
             
-            <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted); margin-top: 8px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted);">
               <span>Ціль: 50 000 ₴</span>
               <span style="font-weight:700; color: var(--color-books);">72%</span>
             </div>
@@ -532,11 +502,10 @@
 
   <footer>
     <div class="container footer-content">
-      <i class="ph-fill ph-planet footer-logo"></i>
+      <i class="ph-fill ph-planet footer-logo" style="font-size: 1.5rem; opacity: 0.3;"></i>
       <span class="legal-text">
         БЛАГОДІЙНА ОРГАНІЗАЦІЯ «БЛАГОДІЙНИЙ ФОНД СВІТОГЛЯД»<br>
-        ЄДРПОУ: 44659520 • РЕЄСТРАЦІЯ: 03.05.2022<br>
-        УКРАЇНА, КИЇВ
+        ЄДРПОУ: 44659520 • РЕЄСТРАЦІЯ: 03.05.2022
       </span>
     </div>
   </footer>
@@ -547,24 +516,19 @@
       const logoIcon = document.getElementById('logoIcon');
       const logoText = document.getElementById('logoText');
       
-      // Update Body Class
       body.classList.remove('mode-books', 'mode-army');
       body.classList.add('mode-' + mode);
 
-      // Toggle Buttons
       document.querySelectorAll('.switch-btn').forEach(btn => btn.classList.remove('active'));
       event.currentTarget.classList.add('active');
 
-      // Toggle Cards
       document.querySelectorAll('.project-card').forEach(card => card.classList.remove('active'));
       document.getElementById('card-' + mode).classList.add('active');
 
-      // Dynamic Colors for Logo/Highlights
       const activeColor = (mode === 'army') ? 'var(--color-army)' : 'var(--color-books)';
       
       logoIcon.style.color = activeColor;
       logoText.style.color = activeColor;
-      
       document.querySelector('.hero-highlight').style.setProperty('--color-books', activeColor);
     }
 
@@ -585,7 +549,6 @@
       const plasticEl = document.getElementById("plastic-counter");
       if(plasticEl) animateValue(plasticEl, 0, 196, 2000);
       
-      // Ensure logo matches default state on load
       const isArmy = document.body.classList.contains('mode-army');
       const startColor = isArmy ? 'var(--color-army)' : 'var(--color-books)';
       document.querySelector('.hero-highlight').style.setProperty('--color-books', startColor);
