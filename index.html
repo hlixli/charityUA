@@ -7,60 +7,62 @@
   <meta name="description" content="Благодійний фонд СвітоГляд. Ініціатива Скарбоня Книжок та друк пластику для ЗСУ." />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Manrope:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <style>
     :root {
-      /* --- Core Palette --- */
-      --bg-dark: #050505;
-      --bg-panel: #0f0f0f;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-light: rgba(255, 255, 255, 0.15);
+      /* --- Core Palette (Light/Sharp) --- */
+      --bg-page: #ffffff;
+      --bg-panel: #f2f2f0; /* Технічний світлий */
+      --bg-accent: #e5e7eb;
+      
+      --border-color: #d1d5db;
+      --border-strong: #111827; /* Майже чорний для акцентів */
       
       /* --- Text Colors --- */
-      --text-main: #ededed;
-      --text-muted: #888888;
-      --text-dim: #444444;
+      --text-main: #111827;  /* Темно-сірий/Чорний */
+      --text-muted: #6b7280; /* Середній сірий */
+      --text-on-dark: #ffffff;
 
       /* --- Brand Colors --- */
-      --color-books: #8b5cf6;
-      --color-books-glow: rgba(139, 92, 246, 0.4);
+      --color-books: #7c3aed; /* Насичений фіолетовий */
+      --color-army: #4d7c0f;  /* Глибокий оливковий */
+      --color-army-light: #ecfccb;
       
-      --color-army: #5c8d08;
-      --color-army-glow: rgba(92, 141, 8, 0.4);
-
-      --status-ok: #10b981;
-      --status-warn: #f59e0b;
-
       /* --- Layout Variables --- */
       --container-width: 1100px;
-      --radius-lg: 24px;
-      --radius-md: 12px;
-      --radius-sm: 8px;
+      /* Гострі кути для строгого дизайну */
+      --radius-none: 0px; 
+      --radius-sm: 2px;
+      
       --font-tech: 'JetBrains Mono', monospace;
       --font-head: 'Space Grotesk', sans-serif;
+      --font-body: 'Manrope', sans-serif;
+
+      --shadow-soft: 0 4px 20px rgba(0,0,0,0.05);
+      --shadow-sharp: 4px 4px 0px rgba(0,0,0,0.1);
     }
 
     /* --- Reset --- */
     * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
     body {
       margin: 0;
-      background-color: var(--bg-dark);
+      background-color: var(--bg-page);
       color: var(--text-main);
-      font-family: 'Manrope', sans-serif;
+      font-family: var(--font-body);
       overflow-x: hidden;
       line-height: 1.5;
     }
     
     a { text-decoration: none; color: inherit; transition: 0.2s; }
     ul { list-style: none; padding: 0; margin: 0; }
-    h1, h2, h3 { margin: 0; font-family: var(--font-head); font-weight: 700; }
+    h1, h2, h3 { margin: 0; font-family: var(--font-head); font-weight: 700; color: var(--text-main); }
+    button { font-family: var(--font-head); cursor: pointer; }
 
     /* --- Utilities --- */
     .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
-    .flex-center { display: flex; align-items: center; justify-content: center; }
     .text-tech { font-family: var(--font-tech); text-transform: uppercase; letter-spacing: -0.5px; }
     .hidden-mobile { display: block; }
     
@@ -69,19 +71,19 @@
       .container { padding: 0 16px; }
     }
 
-    /* --- Background Ambient --- */
+    /* --- Background Ambient (Subtle in Light Mode) --- */
     .glow-spot {
-      position: fixed; width: 50vw; height: 50vw; border-radius: 50%;
-      filter: blur(150px); opacity: 0.15; z-index: -1; pointer-events: none;
+      position: fixed; width: 60vw; height: 60vw; border-radius: 50%;
+      filter: blur(120px); opacity: 0.15; z-index: -1; pointer-events: none;
       transition: background-color 1.2s ease;
     }
-    .glow-top { top: -10%; left: 50%; transform: translateX(-50%); background: var(--color-books); }
-    .glow-btm { bottom: -10%; left: 50%; transform: translateX(-50%); background: var(--color-army); }
+    .glow-top { top: -20%; left: 50%; transform: translateX(-50%); background: var(--color-books); }
+    .glow-btm { bottom: -20%; left: 50%; transform: translateX(-50%); background: var(--color-army); }
 
     /* --- Header --- */
     header {
-      border-bottom: 1px solid var(--border);
-      background: rgba(5, 5, 5, 0.8);
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.9);
       backdrop-filter: blur(12px);
       position: sticky; top: 0; z-index: 100;
       padding: 16px 0;
@@ -89,236 +91,320 @@
     .nav-row { display: flex; justify-content: space-between; align-items: center; }
     .logo {
       font-size: 1.2rem; font-weight: 800; display: flex; align-items: center; gap: 10px;
+      letter-spacing: -0.03em;
     }
-    .logo span { color: var(--color-books); transition: color 0.5s; }
+    .logo span { transition: color 0.5s; }
+    
     .btn-small {
-      font-size: 0.85rem; font-weight: 600; padding: 8px 16px;
-      border: 1px solid var(--border); border-radius: 50px;
-      background: var(--bg-panel); color: #fff;
+      font-size: 0.85rem; font-weight: 700; padding: 10px 20px;
+      border: 1px solid var(--border-strong); 
+      border-radius: var(--radius-none);
+      background: var(--text-main); color: #fff;
+      transition: all 0.2s;
     }
-    .btn-small:hover { border-color: #fff; }
+    .btn-small:hover { 
+      background: transparent; color: var(--text-main);
+    }
 
     /* --- Hero Section --- */
-    .hero { padding: 60px 0 40px; text-align: center; }
-    .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; }
-    .hero p { color: var(--text-muted); max-width: 500px; margin: 0 auto 40px; font-size: 1.1rem; }
-    .hero-highlight { color: #fff; position: relative; display: inline-block; }
+    .hero { padding: 80px 0 60px; text-align: center; }
+    .hero h1 { 
+      font-size: clamp(2.5rem, 7vw, 5rem); 
+      line-height: 1; 
+      margin-bottom: 24px;
+      letter-spacing: -0.04em;
+    }
+    .hero p { 
+      color: var(--text-muted); 
+      max-width: 520px; 
+      margin: 0 auto 40px; 
+      font-size: 1.15rem; 
+      font-weight: 500;
+    }
+    .hero-highlight { 
+      position: relative; 
+      display: inline-block; 
+      z-index: 1;
+      padding: 0 5px;
+    }
+    /* Marker effect */
     .hero-highlight::after {
-      content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 8px;
-      background: var(--color-books); opacity: 0.6; z-index: -1; border-radius: 4px;
+      content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 30%;
+      background: var(--color-books); opacity: 0.2; z-index: -1; 
+      border-radius: 0;
       transition: background 0.5s;
     }
 
-    /* --- StatStrip (Dashboard) --- */
+    /* --- StatStrip (Technical Grid) --- */
     .stat-strip-container {
-      margin-bottom: 60px;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,0.02);
+      margin-bottom: 80px;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-panel);
     }
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1px;
-      background: var(--border);
+      background: var(--border-color); /* Lines between cells */
+      border-left: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
     }
     .stat-cell {
-      background: var(--bg-dark);
-      padding: 18px 18px 16px;
+      background: var(--bg-page);
+      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-height: 90px;
+      min-height: 110px;
     }
     .stat-label {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 600;
       color: var(--text-muted);
       font-family: var(--font-tech);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
     .stat-value-big {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: 800;
-      color: #fff;
+      color: var(--text-main);
       display: flex;
       align-items: baseline;
       gap: 6px;
-      letter-spacing: 0.02em;
+      letter-spacing: -0.03em;
     }
     .stat-note {
       font-size: 0.75rem;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 6px;
+      line-height: 1.3;
     }
+    /* Highlight first cell */
     .stat-main {
-      background: radial-gradient(circle at top left, rgba(139,92,246,0.18), transparent 55%);
-      border-right: 1px solid rgba(255,255,255,0.04);
+      background: #fafafa;
+      position: relative;
+      overflow: hidden;
     }
+    .stat-main::before {
+      content:''; position: absolute; top:0; left:0; width: 4px; height: 100%;
+      background: var(--color-books); transition: background 0.5s;
+    }
+    
+    .mode-army .stat-main::before { background: var(--color-army); }
 
     @media (max-width: 768px) {
-      .stat-cell { min-height: auto; }
+      .stat-cell { min-height: auto; padding: 20px; }
     }
 
-    /* --- Tab Switcher --- */
+    /* --- Tab Switcher (Sharp) --- */
     .switcher {
-      display: inline-flex; background: var(--bg-panel); padding: 4px;
-      border-radius: 50px; border: 1px solid var(--border);
-      margin-bottom: 40px; position: relative; left: 50%; transform: translateX(-50%);
+      display: inline-flex; 
+      background: transparent; 
+      border: 1px solid var(--border-color);
+      margin-bottom: 50px; 
+      position: relative; left: 50%; transform: translateX(-50%);
     }
     .switch-btn {
-      background: transparent; border: none; color: var(--text-muted);
-      padding: 10px 24px; border-radius: 40px; cursor: pointer;
-      font-weight: 600; font-family: var(--font-head); transition: 0.3s;
-      display: flex; align-items: center; gap: 8px; font-size: 0.95rem;
+      background: var(--bg-page); 
+      border: none; 
+      color: var(--text-muted);
+      padding: 14px 32px; 
+      cursor: pointer;
+      font-weight: 600; 
+      font-family: var(--font-head); 
+      transition: 0.2s;
+      display: flex; align-items: center; gap: 8px; font-size: 1rem;
+      border-right: 1px solid var(--border-color);
     }
-    .switch-btn:hover { color: #fff; }
-    .switch-btn.active { background: #fff; color: #000; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .switch-btn:last-child { border-right: none; }
     
-    .mode-army .switch-btn.active { background: var(--color-army); color: #fff; }
-    .mode-books .switch-btn.active { background: var(--color-books); color: #fff; }
+    .switch-btn:hover { color: var(--text-main); background: #fafafa; }
+    
+    .switch-btn.active { 
+      background: var(--text-main); 
+      color: #fff; 
+    }
+    
+    .mode-army .switch-btn.active { background: var(--color-army); }
+    .mode-books .switch-btn.active { background: var(--color-books); }
 
-    /* --- Main Cards --- */
+    /* --- Main Cards (Sharp & Clean) --- */
     .content-wrapper { position: relative; min-height: 500px; }
     .project-card {
       display: none;
-      animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .project-card.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
     .card-layout {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
-      background: var(--bg-panel); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: 40px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      background: var(--bg-page); 
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-sharp);
     }
-    @media (max-width: 850px) { .card-layout { grid-template-columns: 1fr; padding: 24px; } }
+    @media (max-width: 850px) { .card-layout { grid-template-columns: 1fr; } }
 
-    .card-info h2 { font-size: 2rem; margin-bottom: 16px; }
-    .card-info p { color: #bbb; margin-bottom: 24px; line-height: 1.6; }
+    .card-info { padding: 40px; border-right: 1px solid var(--border-color); }
+    @media (max-width: 850px) { .card-info { border-right: none; border-bottom: 1px solid var(--border-color); } }
+
+    .card-info h2 { font-size: 2.2rem; margin-bottom: 20px; letter-spacing: -0.03em; }
+    .card-info p { color: var(--text-muted); margin-bottom: 30px; line-height: 1.7; font-size: 1.05rem; }
+    
     .tag {
-      display: inline-block; padding: 4px 10px; border-radius: 6px;
-      font-size: 0.75rem; font-family: var(--font-tech);
-      background: rgba(255,255,255,0.05); color: var(--text-muted); margin-bottom: 20px;
+      display: inline-block; padding: 6px 12px; 
+      font-size: 0.75rem; font-family: var(--font-tech); font-weight: 600;
+      background: var(--bg-panel); color: var(--text-main); 
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
     }
+
+    .check-list li {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px; color: var(--text-main); font-weight: 500;
+    }
+    .check-list i { font-size: 1.2rem; }
 
     /* Stats inside card */
     .fund-stats {
-      background: rgba(0,0,0,0.3); padding: 24px; border-radius: var(--radius-md);
-      border: 1px solid var(--border);
+      padding: 40px; 
+      background: var(--bg-panel);
+      display: flex; flex-direction: column; justify-content: center;
     }
+    
+    .progress-container { margin: 25px 0; }
+    
     .progress-track {
-      height: 12px; background: rgba(255,255,255,0.1); border-radius: 20px;
-      overflow: hidden; margin: 15px 0;
+      height: 16px; background: #e5e5e5; border: 1px solid #d4d4d4;
+      border-radius: var(--radius-none);
+      overflow: hidden;
     }
-    .progress-bar { height: 100%; width: 0%; transition: width 1.5s ease; border-radius: 20px; }
+    .progress-bar { height: 100%; width: 0%; transition: width 1.5s ease; border-radius: 0; }
     
     .btn-donate {
-      width: 100%; padding: 18px; border: none; border-radius: var(--radius-md);
-      font-family: var(--font-head); font-weight: 700; font-size: 1.1rem;
-      text-transform: uppercase; cursor: pointer; margin-top: 20px;
-      transition: transform 0.2s, filter 0.2s; color: #fff;
+      width: 100%; padding: 20px; 
+      border: 2px solid transparent; 
+      border-radius: var(--radius-none);
+      font-family: var(--font-tech); font-weight: 700; font-size: 1.1rem;
+      text-transform: uppercase; cursor: pointer; margin-top: 10px;
+      transition: all 0.2s; color: #fff;
     }
-    .btn-donate:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .btn-donate:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
     .btn-donate:active { transform: translateY(0); }
 
-    .theme-books .progress-bar { background: var(--color-books); box-shadow: 0 0 15px var(--color-books-glow); }
+    /* Theme Specifics inside Card */
+    .theme-books .progress-bar { background: var(--color-books); }
     .theme-books .btn-donate { background: var(--color-books); }
     .theme-books h2 span { color: var(--color-books); }
+    .theme-books .check-list i { color: var(--color-books); }
 
-    .theme-army .progress-bar { background: var(--color-army); box-shadow: 0 0 15px var(--color-army-glow); }
+    .theme-army .progress-bar { background: var(--color-army); }
     .theme-army .btn-donate { background: var(--color-army); }
     .theme-army h2 span { color: var(--color-army); }
+    .theme-army .check-list i { color: var(--color-army); }
 
     /* --- Social Grid --- */
-    .social-section { padding: 80px 0; }
-    .social-header { text-align: center; margin-bottom: 40px; }
+    .social-section { padding: 80px 0; background: var(--bg-panel); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+    .social-header { text-align: center; margin-bottom: 50px; font-size: 2rem; letter-spacing: -0.03em;}
+    
     .social-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 30px;
       justify-content: center;
     }
     .social-card {
-      background: var(--bg-panel);
-      border: 1px solid var(--border);
-      padding: 24px;
-      border-radius: var(--radius-md);
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      padding: 30px;
+      border-radius: var(--radius-none);
       transition: 0.3s;
-      max-width: 380px;
-      margin: 0 auto;
+      box-shadow: var(--shadow-soft);
     }
-    .social-card:hover { border-color: var(--border-light); transform: translateY(-3px); }
-    .brand-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .social-card:hover { border-color: var(--border-strong); transform: translateY(-5px); box-shadow: var(--shadow-sharp); }
+    
+    .brand-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; font-family: var(--font-head); }
     
     .link-list a {
       display: flex; align-items: center; gap: 12px;
-      padding: 12px; margin-bottom: 8px; border-radius: 8px;
-      background: rgba(255,255,255,0.03); color: #ccc;
-      font-weight: 500; font-size: 0.9rem;
+      padding: 14px; margin-bottom: 10px; 
+      border: 1px solid transparent;
+      background: #f9fafb; color: var(--text-main);
+      font-weight: 600; font-size: 0.95rem;
+      transition: 0.2s;
     }
-    .link-list a:hover { background: rgba(255,255,255,0.08); color: #fff; }
-    .link-list i { font-size: 1.2rem; }
+    .link-list a:hover { 
+      background: #fff; 
+      border-color: var(--border-color);
+      color: #000;
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+    }
+    .link-list i { font-size: 1.3rem; color: var(--text-muted); }
 
     /* --- Footer --- */
     footer {
-      border-top: 1px solid var(--border); padding: 40px 0;
+      padding: 60px 0;
       color: var(--text-muted); font-size: 0.9rem;
-      background: #000;
+      background: #f9f9f9;
     }
     .footer-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center; gap: 20px;
     }
-    .legal-text { font-family: var(--font-tech); font-size: 0.75rem; opacity: 0.7; line-height: 1.6; }
+    .legal-text { 
+      font-family: var(--font-tech); 
+      font-size: 0.7rem; 
+      opacity: 0.8; 
+      line-height: 1.7; 
+      max-width: 800px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .footer-logo { font-size: 1.5rem; color: var(--text-main); opacity: 0.3; }
 
   </style>
 </head>
-<body class="mode-books">
-
-  <div class="glow-spot glow-top" id="topLight"></div>
+<body class="mode-army"> <div class="glow-spot glow-top" id="topLight"></div>
   <div class="glow-spot glow-btm" id="btmLight"></div>
 
   <header>
     <div class="container nav-row">
       <a href="#" class="logo">
-        <i class="ph-fill ph-planet" id="logoIcon"></i>
-        <div>БО <span>«БФ СВІТОГЛЯД»</span></div>
+        <i class="ph-fill ph-planet" id="logoIcon" style="color: var(--color-army)"></i>
+        <div>БО <span id="logoText" style="color: var(--color-army)">«БФ СВІТОГЛЯД»</span></div>
       </a>
-      <a href="#donate-anchor" class="btn-small">Допомогти</a>
+      <a href="#donate-anchor" class="btn-small">ПІДТРИМАТИ</a>
     </div>
   </header>
 
   <section class="hero container">
     <h1>Майбутнє дітей.<br><span class="hero-highlight" id="heroText">Захист держави.</span></h1>
-    <p>Офіційний фонд. Поєднуємо гуманітарні та мілітарні ініціативи. Найпростіша передача 1000 гривень від держави.</p>
+    <p>Офіційний фонд. Поєднуємо гуманітарні та мілітарні ініціативи. Ефективна конвертація вашої довіри в результат.</p>
   </section>
 
-  <!-- DASHBOARD / STATGRID -->
   <div class="stat-strip-container">
     <div class="container">
       <div class="stat-grid">
         <div class="stat-cell stat-main">
           <span class="stat-label">ПЛАСТИК ДЛЯ ЗСУ</span>
           <span class="stat-value-big" id="plastic-counter">196 КГ</span>
-          <span class="stat-note">Фактично передано матеріалу</span>
+          <span class="stat-note">Фактично передано матеріалу інженерам</span>
         </div>
         <div class="stat-cell">
-          <span class="stat-label">КІЛЬКІСТЬ ЛЮДЕЙ</span>
-          <span class="stat-value-big">21</span>
-          <span class="stat-note">Вже приєдналися</span>
+          <span class="stat-label">СПІЛЬНОТА</span>
+          <span class="stat-value-big">21+</span>
+          <span class="stat-note">Активних волонтерів та донаторів</span>
         </div>
         <div class="stat-cell">
           <span class="stat-label">СУМА ВНЕСКУ</span>
           <span class="stat-value-big">≤ 1000 ₴</span>
-          <span class="stat-note">Передача 1000 ₴ від держави або меншої суми</span>
+          <span class="stat-note">Комфортний донат від 1000 ₴</span>
         </div>
         <div class="stat-cell">
-          <span class="stat-label">БАНКА</span>
-          <span class="stat-value-big">на вибір</span>
-          <span class="stat-note">Скарбоня Книжок / Пластик для ЗСУ</span>
+          <span class="stat-label">МЕТА</span>
+          <span class="stat-value-big">ПЕРЕМОГА</span>
+          <span class="stat-note">Освіта для дітей та дрони для захисту</span>
         </div>
       </div>
     </div>
@@ -326,81 +412,84 @@
 
   <section class="container" id="donate-anchor">
     <div class="switcher">
-      <button class="switch-btn active" onclick="setMode('books')">
+      <button class="switch-btn" onclick="setMode('books')">
         <i class="ph ph-book-open"></i> Скарбоня Книжок
       </button>
-      <button class="switch-btn" onclick="setMode('army')">
+      <button class="switch-btn active" onclick="setMode('army')">
         <i class="ph ph-crosshair"></i> Пластик ЗСУ
       </button>
     </div>
 
     <div class="content-wrapper">
       
-      <div id="card-books" class="project-card theme-books active">
-        <div class="card-layout">
-          <div class="card-info">
-            <span class="tag">#ОСВІТА #ДІТИ</span>
-            <h2>Ініціатива <span>«Скарбоня книжок»</span></h2>
-            <p>
-              Ми наповнюємо бібліотеки дитячих будинків сучасною літературою. Книга формує світогляд. 
-              Кожен внесок перетворюється на казки, енциклопедії та підручники для тих, хто цього потребує найбільше.
-            </p>
-            <ul style="color: var(--text-muted); margin-bottom: 20px;">
-              <li><i class="ph-bold ph-check" style="color:var(--color-books)"></i> Закупівля українських видань</li>
-              <li><i class="ph-bold ph-check" style="color:var(--color-books)"></i> Логістика до інтернатів</li>
-              <li><i class="ph-bold ph-check" style="color:var(--color-books)"></i> Фотозвіти передач</li>
-            </ul>
-          </div>
-
-          <div class="fund-stats">
-            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-              <span style="font-weight:700; font-size:1.1rem;">Зібрано коштів</span>
-              <span class="text-tech" style="color:#fff;">36 400 ₴</span>
-            </div>
-            <div class="progress-track">
-              <div class="progress-bar" style="width: 72%;"></div>
-            </div>
-            <div style="display:flex; justify-content:space-between; font-size:0.8rem; opacity:0.7;">
-              <span>Ціль: 50 000 ₴</span>
-              <span>72%</span>
-            </div>
-
-            <a href="https://send.monobank.ua/jar/YOUR_BOOK_JAR_LINK" target="_blank">
-              <button class="btn-donate">Приєднатися</button>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div id="card-army" class="project-card theme-army">
+      <div id="card-army" class="project-card theme-army active">
         <div class="card-layout">
           <div class="card-info">
             <span class="tag">#ТЕХНОЛОГІЇ #ЗСУ</span>
             <h2>Пластик для <span>Дронів</span></h2>
             <p>
-              Збираємо кошти на закупівлю інженерного пластику (PETG/PLA) для друку деталей. Увесь придбаний матеріал передаємо безпосередньо в майстерні підрозділів, де друкують хвостовики, скиди та корпуси для «пташок»
+              Збираємо кошти на закупівлю інженерного пластику (PETG/PLA) для 3D-друку. Ми співпрацюємо безпосередньо з майстернями підрозділів. Ваш донат перетворюється на хвостовики, корпуси скидів та кріплення для "пташок".
             </p>
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 3px солід var(--color-army);">
-              <strong style="color: #fff; display:block; margin-bottom:5px;">Статистика друку:</strong>
-              <span style="font-size: 0.9rem; color: #ccc;">Вже передано понад <span style="color:#fff; font-weight:700;">196 кг</span> пластику. Це тисячі деталей.</span>
+            <div style="background: var(--bg-panel); padding: 20px; border: 1px solid var(--border-color); border-left: 4px solid var(--color-army);">
+              <strong style="color: var(--text-main); display:block; margin-bottom:5px; font-family: var(--font-tech);">СТАТИСТИКА:</strong>
+              <span style="font-size: 0.95rem; color: var(--text-muted);">Передано понад <span style="color:var(--text-main); font-weight:700;">196 кг</span> пластику. Це тисячі надрукованих деталей.</span>
             </div>
           </div>
 
           <div class="fund-stats">
-            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-              <span style="font-weight:700; font-size:1.1rem;">Бюджет на пластик</span>
-              <span class="text-tech" style="color:#fff;">0 ₴</span>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; align-items:flex-end;">
+              <span style="font-weight:700; font-size:1.2rem; font-family: var(--font-head);">Бюджет збору</span>
+              <span class="text-tech" style="color:var(--text-main); font-weight:700;">0 ₴</span>
             </div>
+            
             <div class="progress-track">
               <div class="progress-bar" style="width: 1%;"></div>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:0.8rem; opacity:0.7;">
+            
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted); margin-top: 8px;">
               <span>Потреба: 50 000 ₴</span>
-              <span>1%</span>
+              <span style="font-weight:700; color: var(--color-army);">1%</span>
             </div>
 
             <a href="https://send.monobank.ua/jar/YOUR_PLASTIC_JAR_LINK" target="_blank">
-              <button class="btn-donate">Донат на Пластик</button>
+              <button class="btn-donate">Задонатити на пластик</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="card-books" class="project-card theme-books">
+        <div class="card-layout">
+          <div class="card-info">
+            <span class="tag">#ОСВІТА #ДІТИ</span>
+            <h2>Ініціатива <span>«Скарбоня книжок»</span></h2>
+            <p>
+              Ми наповнюємо бібліотеки дитячих будинків сучасною українською літературою. Якісна книга формує світогляд. Кожен внесок — це казки, енциклопедії та розвиваючі ігри для дітей, позбавлених батьківського піклування.
+            </p>
+            <ul class="check-list">
+              <li><i class="ph-bold ph-check"></i> Закупівля виключно українських видань</li>
+              <li><i class="ph-bold ph-check"></i> Пряма логістика до інтернатів</li>
+              <li><i class="ph-bold ph-check"></i> Повні фотозвіти кожної передачі</li>
+            </ul>
+          </div>
+
+          <div class="fund-stats">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; align-items:flex-end;">
+              <span style="font-weight:700; font-size:1.2rem; font-family: var(--font-head);">Зібрано коштів</span>
+              <span class="text-tech" style="color:var(--text-main); font-weight:700;">36 400 ₴</span>
+            </div>
+            
+            <div class="progress-track">
+              <div class="progress-bar" style="width: 72%;"></div>
+            </div>
+            
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted); margin-top: 8px;">
+              <span>Ціль: 50 000 ₴</span>
+              <span style="font-weight:700; color: var(--color-books);">72%</span>
+            </div>
+
+            <a href="https://send.monobank.ua/jar/YOUR_BOOK_JAR_LINK" target="_blank">
+              <button class="btn-donate">Підтримати книжками</button>
             </a>
           </div>
         </div>
@@ -409,45 +498,45 @@
     </div>
   </section>
 
-  <section class="container social-section">
-    <h2 class="social-header">Спільнота та Зв'язок</h2>
-    
-    <div class="social-grid">
+  <section class="social-section">
+    <div class="container">
+      <h2 class="social-header">Спільнота та Зв'язок</h2>
       
-      <div class="social-card">
-        <div class="brand-title">
-          <i class="ph-fill ph-cube" style="color: var(--color-army);"></i> Craftorium
+      <div class="social-grid">
+        
+        <div class="social-card">
+          <div class="brand-title">
+            <i class="ph-fill ph-cube" style="color: var(--color-army);"></i> Craftorium
+          </div>
+          <div class="link-list">
+            <a href="https://www.facebook.com/profile.php?id=61550055607232" target="_blank"><i class="ph ph-facebook-logo"></i> Facebook</a>
+            <a href="https://www.instagram.com/craftoriumua?igsh=Z3dtMWtqa2NtNjJn" target="_blank"><i class="ph ph-instagram-logo"></i> Instagram</a>
+            <a href="https://t.me/ibbclub_bot?start=604016391" target="_blank"><i class="ph ph-telegram-logo"></i> Telegram Bot</a>
+          </div>
         </div>
-        <div class="link-list">
-          <a href="https://www.facebook.com/profile.php?id=61550055607232" target="_blank"><i class="ph ph-facebook-logo"></i> Craftorium Facebook</a>
-          <a href="https://www.instagram.com/craftoriumua?igsh=Z3dtMWtqa2NtNjJn" target="_blank"><i class="ph ph-instagram-logo"></i> Craftorium Instagram</a>
-          <a href="https://t.me/ibbclub_bot?start=604016391" target="_blank"><i class="ph ph-telegram-logo"></i> Craftorium Telegram</a>
-        </div>
-      </div>
 
-      <div class="social-card">
-        <div class="brand-title">
-          <i class="ph-fill ph-globe-stand" style="color: var(--color-books);"></i> Світогляд
+        <div class="social-card">
+          <div class="brand-title">
+            <i class="ph-fill ph-globe-stand" style="color: var(--color-books);"></i> Світогляд
+          </div>
+          <div class="link-list">
+            <a href="t.me/svitoglyadfund" target="_blank"><i class="ph ph-telegram-logo"></i> Telegram Channel</a>
+            <a href="https://www.instagram.com/svitoglyad_bf?igsh=N3RxcGh1ZXp1bDhj" target="_blank"><i class="ph ph-instagram-logo"></i> Instagram</a>
+            <a href="https://www.facebook.com/share/1DtBCYniYN/?mibextid=wwXIfr" target="_blank"><i class="ph ph-facebook-logo"></i> Facebook</a>
+          </div>
         </div>
-        <div class="link-list">
-          <a href="t.me/svitoglyadfund" target="_blank"><i class="ph ph-telegram-logo"></i> Світогляд Telegram</a>
-          <a href="https://www.instagram.com/svitoglyad_bf?igsh=N3RxcGh1ZXp1bDhj" target="_blank"><i class="ph ph-instagram-logo"></i> Світогляд Instagram</a>
-          <a href="https://www.facebook.com/share/1DtBCYniYN/?mibextid=wwXIfr" target="_blank"><i class="ph ph-facebook-logo"></i> Світогляд Facebook</a>
-        </div>
-      </div>
 
+      </div>
     </div>
   </section>
 
   <footer>
     <div class="container footer-content">
+      <i class="ph-fill ph-planet footer-logo"></i>
       <span class="legal-text">
         БЛАГОДІЙНА ОРГАНІЗАЦІЯ «БЛАГОДІЙНИЙ ФОНД СВІТОГЛЯД»<br>
-        Скорочена назва: БО «БФ СВІТОГЛЯД»<br>
-        Назва англійською: SVITOGLIAD CHARITABLE FOUNDATION (SVITOGLIAD CF)<br>
-        Статус юридичної особи (станом на 22.11.2025): Зареєстровано • Статус з ЄДР: Зареєстровано<br>
-        Код ЄДРПОУ: 44659520 • Дата реєстрації: 03.05.2022 (3 роки 6 місяців)<br>
-        Керівник: Молодцов Ростислав Віталійович • Організаційно-правова форма: БЛАГОДІЙНА ОРГАНІЗАЦІЯ
+        ЄДРПОУ: 44659520 • РЕЄСТРАЦІЯ: 03.05.2022<br>
+        УКРАЇНА, КИЇВ
       </span>
     </div>
   </footer>
@@ -456,24 +545,27 @@
     function setMode(mode) {
       const body = document.body;
       const logoIcon = document.getElementById('logoIcon');
-      const heroText = document.getElementById('heroText');
+      const logoText = document.getElementById('logoText');
       
+      // Update Body Class
       body.classList.remove('mode-books', 'mode-army');
       body.classList.add('mode-' + mode);
 
+      // Toggle Buttons
       document.querySelectorAll('.switch-btn').forEach(btn => btn.classList.remove('active'));
       event.currentTarget.classList.add('active');
 
+      // Toggle Cards
       document.querySelectorAll('.project-card').forEach(card => card.classList.remove('active'));
       document.getElementById('card-' + mode).classList.add('active');
 
-      if (mode === 'army') {
-        logoIcon.style.color = 'var(--color-army)';
-        document.querySelector('.hero-highlight').style.setProperty('--color-books', 'var(--color-army)');
-      } else {
-        logoIcon.style.color = 'var(--color-books)';
-        document.querySelector('.hero-highlight').style.removeProperty('--color-books');
-      }
+      // Dynamic Colors for Logo/Highlights
+      const activeColor = (mode === 'army') ? 'var(--color-army)' : 'var(--color-books)';
+      
+      logoIcon.style.color = activeColor;
+      logoText.style.color = activeColor;
+      
+      document.querySelector('.hero-highlight').style.setProperty('--color-books', activeColor);
     }
 
     function animateValue(obj, start, end, duration) {
@@ -491,13 +583,13 @@
 
     document.addEventListener("DOMContentLoaded", () => {
       const plasticEl = document.getElementById("plastic-counter");
-      animateValue(plasticEl, 0, 196, 2500);
+      if(plasticEl) animateValue(plasticEl, 0, 196, 2000);
+      
+      // Ensure logo matches default state on load
+      const isArmy = document.body.classList.contains('mode-army');
+      const startColor = isArmy ? 'var(--color-army)' : 'var(--color-books)';
+      document.querySelector('.hero-highlight').style.setProperty('--color-books', startColor);
     });
   </script>
 </body>
 </html>
-
-
-
-
-
