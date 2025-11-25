@@ -52,7 +52,7 @@
 
     /* --- Reset --- */
     * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-    
+     
     html {
       scroll-behavior: smooth;
     }
@@ -297,7 +297,7 @@
       margin-bottom: 10px; flex-wrap: wrap; gap: 8px;
     }
     .req-row > span { flex-shrink: 0; }
-    
+     
     .req-row strong { 
       color: var(--text-main); 
       text-align: right; 
@@ -340,7 +340,7 @@
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
     }
     .instr-header h3 { font-size: 1.4rem; letter-spacing: -0.02em; }
-    
+     
     .instr-list { display: flex; flex-direction: column; }
     .instr-item {
       display: grid; grid-template-columns: 60px 1fr;
@@ -349,7 +349,7 @@
     }
     .instr-item:last-child { border-bottom: none; }
     .instr-item:hover { background: #fafafa; }
-    
+     
     .instr-num {
       padding: 20px; display: flex; align-items: flex-start; justify-content: center;
       font-family: var(--font-tech); font-weight: 700; color: var(--text-muted); font-size: 1.1rem;
@@ -357,12 +357,12 @@
     .instr-content {
       padding: 20px 20px 20px 0; font-size: 1rem; color: var(--text-main); line-height: 1.5;
     }
-    
+     
     /* Highlight last step */
     .instr-item.highlight { background: #fdfdfd; }
     .instr-item.highlight .instr-num { color: var(--active-color); }
     .instr-item.highlight .instr-content { font-weight: 600; }
-    
+     
     .btn-inline-donate {
       margin-top: 12px; display: inline-flex; align-items: center; gap: 8px;
       padding: 8px 16px; font-size: 0.85rem; background: var(--active-color); color: #fff;
@@ -759,12 +759,12 @@
   <section class="social-section">
     <div class="container">
       <h2 class="social-header">Спільнота та Зв'язок</h2>
-        
+       
       <div class="social-grid">
-          
+         
         <div class="social-card">
           <div class="brand-title">
-            <i class="ph-fill ph-cube" style="color: var(--color-army);"></i> Craftorium
+            <img src="craftorium_logo.png" alt="Craftorium Logo" style="width: 28px; height: 28px; object-fit: contain;"> Craftorium
           </div>
           <div class="link-list">
             <a href="https://www.facebook.com/profile.php?id=61550055607232" target="_blank"><i class="ph ph-facebook-logo"></i> Facebook</a>
@@ -813,11 +813,11 @@
         navigator.clipboard.writeText(text).then(() => {
             const icon = btnElement.querySelector('i');
             const originalClass = icon.className;
-            
+             
             // Visual feedback
             icon.className = 'ph-bold ph-check';
             icon.style.color = '#10b981'; // Green color for success
-            
+             
             setTimeout(() => {
                 icon.className = 'ph ph-copy';
                 icon.style.color = ''; // Reset color
@@ -830,7 +830,7 @@
     function setMode(mode) {
       const body = document.body;
       const logoIcon = document.getElementById('logoIcon');
-        
+       
       // 1. Зміна класу Body
       body.classList.remove('mode-books', 'mode-army');
       body.classList.add('mode-' + mode);
@@ -841,7 +841,7 @@
 
       document.querySelectorAll('.project-card').forEach(card => card.classList.remove('active'));
       document.getElementById('card-' + mode).classList.add('active');
-        
+       
       // 3. Зміна кольору лого
       const activeColor = (mode === 'army') ? 'var(--color-army)' : 'var(--color-books)';
       logoIcon.style.color = activeColor;
@@ -876,7 +876,7 @@
     document.addEventListener("DOMContentLoaded", () => {
       const plasticEl = document.getElementById("plastic-counter");
       if(plasticEl) animateValue(plasticEl, 0, 196, 2000);
-        
+       
       const isArmy = document.body.classList.contains('mode-army');
       const logoIcon = document.getElementById('logoIcon');
       logoIcon.style.color = isArmy ? 'var(--color-army)' : 'var(--color-books)';
