@@ -98,15 +98,21 @@
       letter-spacing: -0.03em;
     }
       
+    /* --- UPDATED BUTTON STYLE --- */
     .btn-small {
       font-size: 0.8rem; font-weight: 700; padding: 8px 18px;
-      border: 1px solid var(--border-strong); 
+      /* Border now matches the active color */
+      border: 1px solid var(--active-color); 
       border-radius: var(--radius-none);
-      background: var(--text-main); color: #fff;
+      /* Background now uses the active color variable */
+      background: var(--active-color); 
+      color: #fff;
       transition: all 0.2s;
     }
     .btn-small:hover { 
-      background: transparent; color: var(--text-main);
+      background: transparent; 
+      /* Text color becomes the active color on hover */
+      color: var(--active-color);
       box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
     }
 
@@ -618,6 +624,10 @@
             <a href="https://send.monobank.ua/jar/YOUR_PLASTIC_JAR_LINK" target="_blank" class="btn-inline-donate">
               <i class="ph-bold ph-lightning"></i> Перерахувати 
             </a>
+            <br>
+            <span style="font-size: 0.85rem; color: var(--text-muted;); display: block; margin-top: 8px; font-weight: 500;">
+              Якщо посилання не працює виконайте переказ за реквізитами
+            </span>
           </div>
         </div>
 
