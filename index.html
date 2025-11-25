@@ -52,6 +52,11 @@
 
     /* --- Reset --- */
     * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+    
+    html {
+      scroll-behavior: smooth; /* Плавна прокрутка сторінки */
+    }
+
     body {
       margin: 0;
       background-color: var(--bg-page);
@@ -497,7 +502,7 @@
               <span style="font-weight:700; color: var(--active-color);">1%</span>
             </div>
 
-            <a href="https://send.monobank.ua/jar/YOUR_PLASTIC_JAR_LINK" target="_blank">
+            <a href="#instruction-block">
               <button class="btn-donate">Донат на пластик</button>
             </a>
 
@@ -573,7 +578,7 @@
     </div>
   </section>
 
-  <section class="container instruction-section">
+  <section class="container instruction-section" id="instruction-block">
     <div class="instruction-box">
       <div class="instr-header">
         <h3>Як перетворити «Зимову тисячу» на корисні речі?</h3>
@@ -744,4 +749,3 @@
   </script>
 </body>
 </html>
-
