@@ -54,7 +54,7 @@
     * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
     
     html {
-      scroll-behavior: smooth; /* Плавна прокрутка сторінки */
+      scroll-behavior: smooth;
     }
 
     body {
@@ -103,20 +103,16 @@
       letter-spacing: -0.03em;
     }
       
-    /* --- UPDATED BUTTON STYLE --- */
     .btn-small {
       font-size: 0.8rem; font-weight: 700; padding: 8px 18px;
-      /* Border now matches the active color */
       border: 1px solid var(--active-color); 
       border-radius: var(--radius-none);
-      /* Background now uses the active color variable */
       background: var(--active-color); 
       color: #fff;
       transition: all 0.2s;
     }
     .btn-small:hover { 
       background: transparent; 
-      /* Text color becomes the active color on hover */
       color: var(--active-color);
       box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
     }
@@ -286,20 +282,48 @@
       font-size: 0.85rem;
       color: var(--text-muted);
     }
+    .req-block-separate {
+        margin-top: 40px;
+        background: var(--bg-panel);
+        border: 1px solid var(--border-color);
+        padding: 30px;
+    }
     .req-title {
       font-family: var(--font-head); font-weight: 700; color: var(--text-main);
-      margin-bottom: 12px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;
+      margin-bottom: 16px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;
     }
     .req-row {
-      display: flex; justify-content: space-between; align-items: baseline;
-      margin-bottom: 6px; flex-wrap: wrap; gap: 8px;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 10px; flex-wrap: wrap; gap: 8px;
     }
-    .req-row strong { color: var(--text-main); text-align: right; }
-    .req-row.col { flex-direction: column; align-items: flex-start; gap: 2px; margin-bottom: 10px; }
-    .req-row.col strong {
+    .req-row > span { flex-shrink: 0; }
+    
+    .req-row strong { 
+      color: var(--text-main); 
+      text-align: right; 
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .req-row.col { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 14px; }
+    .req-row.col .val-wrapper {
       text-align: left; font-family: var(--font-tech); background: #e4e4e7;
-      padding: 4px 8px; border-radius: 2px; word-break: break-all; width: 100%;
+      padding: 6px 10px; border-radius: 2px; width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
     }
+    .req-row.col strong {
+        word-break: break-all;
+    }
+
+    /* COPY BUTTON STYLE */
+    .btn-copy {
+        background: none; border: none; padding: 4px; margin-left: 4px;
+        color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center;
+        border-radius: 4px; transition: all 0.2s;
+    }
+    .btn-copy:hover { background: rgba(0,0,0,0.05); color: var(--active-color); }
+    .btn-copy:active { transform: scale(0.95); }
+    .btn-copy i { font-size: 1.1rem; }
 
     .card-info h2 span { color: var(--active-color); }
     .check-list i { color: var(--active-color); font-size: 1.2rem; }
@@ -511,12 +535,19 @@
                  
                 <div class="req-row">
                     <span>Отримувач:</span>
-                    <strong>БО "БФ СВІТОГЛЯД"</strong>
+                    <strong style="text-align:right;">
+                        БО "БФ СВІТОГЛЯД"
+                    </strong>
                 </div>
                  
                 <div class="req-row">
                     <span>ЄДРПОУ:</span>
-                    <strong class="text-tech">44659520</strong>
+                    <strong>
+                        <span class="text-tech">44659520</span>
+                        <button class="btn-copy" onclick="copyToClipboard('44659520', this)" title="Скопіювати">
+                            <i class="ph ph-copy"></i>
+                        </button>
+                    </strong>
                 </div>
                  
                 <div class="req-row">
@@ -526,7 +557,12 @@
 
                 <div class="req-row col">
                     <span>IBAN:</span>
-                    <strong class="text-tech">UA453220010000026008700007173</strong>
+                    <div class="val-wrapper">
+                        <span class="text-tech" style="word-break: break-all;">UA453220010000026008700007173</span>
+                        <button class="btn-copy" onclick="copyToClipboard('UA453220010000026008700007173', this)" title="Скопіювати">
+                            <i class="ph ph-copy"></i>
+                        </button>
+                    </div>
                 </div>
                  
                 <div class="req-row">
@@ -534,7 +570,8 @@
                     <strong>Благодійний внесок</strong>
                 </div>
             </div>
-            </div>
+
+          </div>
         </div>
       </div>
 
@@ -571,6 +608,48 @@
             <a href="https://send.monobank.ua/jar/YOUR_BOOK_JAR_LINK" target="_blank">
               <button class="btn-donate">Підтримати книжками</button>
             </a>
+
+            <div class="req-block">
+                <div class="req-title">Реквізити (UAH):</div>
+                 
+                <div class="req-row">
+                    <span>Отримувач:</span>
+                    <strong style="text-align:right;">
+                        БО "БФ СВІТОГЛЯД"
+                    </strong>
+                </div>
+                 
+                <div class="req-row">
+                    <span>ЄДРПОУ:</span>
+                    <strong>
+                        <span class="text-tech">44659520</span>
+                        <button class="btn-copy" onclick="copyToClipboard('44659520', this)" title="Скопіювати">
+                            <i class="ph ph-copy"></i>
+                        </button>
+                    </strong>
+                </div>
+                 
+                <div class="req-row">
+                    <span>Банк:</span>
+                    <strong>УНІВЕРСАЛ БАНК</strong>
+                </div>
+
+                <div class="req-row col">
+                    <span>IBAN:</span>
+                    <div class="val-wrapper">
+                        <span class="text-tech" style="word-break: break-all;">UA453220010000026008700007173</span>
+                        <button class="btn-copy" onclick="copyToClipboard('UA453220010000026008700007173', this)" title="Скопіювати">
+                            <i class="ph ph-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                 
+                <div class="req-row">
+                    <span>Призначення:</span>
+                    <strong>Благодійний внесок</strong>
+                </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -629,14 +708,51 @@
             <a href="https://send.monobank.ua/jar/YOUR_PLASTIC_JAR_LINK" target="_blank" class="btn-inline-donate">
               <i class="ph-bold ph-lightning"></i> Перерахувати на банку
             </a>
-            <br>
-            <span style="font-size: 0.85rem; color: var(--text-muted;); display: block; margin-top: 8px; font-weight: 500;">
-              Якщо посилання не працює виконайте переказ за реквізитами
-            </span>
           </div>
         </div>
 
       </div>
+    </div>
+
+    <div class="req-block req-block-separate">
+        <div class="req-title" style="font-size: 0.9rem; margin-bottom: 20px;">Для інших банківських установ:</div>
+         
+        <div class="req-row">
+            <span>Отримувач:</span>
+            <strong style="text-align:right;">
+                БО "БФ СВІТОГЛЯД"
+            </strong>
+        </div>
+         
+        <div class="req-row">
+            <span>ЄДРПОУ:</span>
+            <strong>
+                <span class="text-tech">44659520</span>
+                <button class="btn-copy" onclick="copyToClipboard('44659520', this)" title="Скопіювати">
+                    <i class="ph ph-copy"></i>
+                </button>
+            </strong>
+        </div>
+         
+        <div class="req-row">
+            <span>Банк:</span>
+            <strong>УНІВЕРСАЛ БАНК</strong>
+        </div>
+
+        <div class="req-row col">
+            <span>IBAN:</span>
+            <div class="val-wrapper">
+                <span class="text-tech" style="word-break: break-all;">UA453220010000026008700007173</span>
+                <button class="btn-copy" onclick="copyToClipboard('UA453220010000026008700007173', this)" title="Скопіювати">
+                    <i class="ph ph-copy"></i>
+                </button>
+            </div>
+        </div>
+         
+        <div class="req-row">
+            <span>Призначення:</span>
+            <strong>Благодійний внесок</strong>
+        </div>
     </div>
   </section>
 
@@ -692,6 +808,25 @@
   </footer>
 
   <script>
+    // Copy Function
+    function copyToClipboard(text, btnElement) {
+        navigator.clipboard.writeText(text).then(() => {
+            const icon = btnElement.querySelector('i');
+            const originalClass = icon.className;
+            
+            // Visual feedback
+            icon.className = 'ph-bold ph-check';
+            icon.style.color = '#10b981'; // Green color for success
+            
+            setTimeout(() => {
+                icon.className = 'ph ph-copy';
+                icon.style.color = ''; // Reset color
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
+    }
+
     function setMode(mode) {
       const body = document.body;
       const logoIcon = document.getElementById('logoIcon');
@@ -749,4 +884,3 @@
   </script>
 </body>
 </html>
-
