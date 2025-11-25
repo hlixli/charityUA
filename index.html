@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>БФ "СвітоГляд" | Craftorium — Технології Перемоги</title>
   <meta name="description" content="Благодійний фонд СВІТОГЛЯД Ініціатива Скарбоня Книжок та друк пластику для ЗСУ." />
-  
+   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  
+   
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <style>
@@ -16,28 +16,28 @@
       /* --- Core Palette --- */
       --bg-page: #ffffff;
       --bg-panel: #f4f4f5;
-      
+       
       --border-color: #e5e7eb;
       --border-strong: #18181b;
-      
+       
       /* --- Text Colors --- */
-      --text-main: #09090b;  
-      --text-muted: #71717a; 
+      --text-main: #09090b;   
+      --text-muted: #71717a;  
 
       /* --- Brand Colors --- */
       --color-books: #7c3aed; 
-      --color-army: #4d7c0f;  
-      
+      --color-army: #4d7c0f;   
+       
       /* --- Dynamic Color --- */
       --active-color: var(--color-army); /* Default start color */
 
       /* --- Layout Variables --- */
       --container-width: 1100px;
-      
+       
       /* Sharp Design */
       --radius-none: 0px; 
       --radius-sm: 2px;
-      
+       
       --font-tech: 'JetBrains Mono', monospace;
       --font-head: 'Space Grotesk', sans-serif;
       --font-body: 'Manrope', sans-serif;
@@ -61,7 +61,7 @@
       line-height: 1.5;
       transition: background-color 0.3s;
     }
-    
+     
     a { text-decoration: none; color: inherit; transition: 0.2s; }
     ul { list-style: none; padding: 0; margin: 0; }
     h1, h2, h3 { margin: 0; font-family: var(--font-head); font-weight: 700; color: var(--text-main); }
@@ -70,7 +70,7 @@
     /* --- Utilities --- */
     .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
     .text-tech { font-family: var(--font-tech); text-transform: uppercase; letter-spacing: -0.5px; }
-    
+     
     @media (max-width: 768px) {
       .container { padding: 0 16px; }
     }
@@ -97,7 +97,7 @@
       font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: 8px;
       letter-spacing: -0.03em;
     }
-    
+     
     .btn-small {
       font-size: 0.8rem; font-weight: 700; padding: 8px 18px;
       border: 1px solid var(--border-strong); 
@@ -181,7 +181,7 @@
       display: flex; align-items: baseline; gap: 6px;
     }
     .stat-note { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
-    
+     
     .stat-main { background: #fafafa; position: relative; }
     .stat-main::before {
       content:''; position: absolute; top:0; left:0; width: 4px; height: 100%;
@@ -203,12 +203,12 @@
       border-right: 1px solid var(--border-color);
     }
     .switch-btn:last-child { border-right: none; }
-    
+     
     /* Active State for Buttons */
     .switch-btn.active { background: var(--text-main); color: #fff; }
     .mode-army .switch-btn.active { background: var(--color-army); }
     .mode-books .switch-btn.active { background: var(--color-books); }
-    
+     
     @media (max-width: 500px) {
       .switcher { width: 100%; }
       .switch-btn { flex: 1; justify-content: center; padding: 12px; }
@@ -231,15 +231,21 @@
     .card-info { padding: 40px; border-right: 1px solid var(--border-color); }
     .fund-stats { padding: 40px; background: var(--bg-panel); display: flex; flex-direction: column; justify-content: center; }
 
+    /* MOBILE CARD ADJUSTMENTS */
     @media (max-width: 850px) {
       .card-info { padding: 30px 20px; border-right: none; border-bottom: 1px solid var(--border-color); }
       .fund-stats { padding: 30px 20px; }
-      .card-info h2 { font-size: 1.8rem; margin-bottom: 16px; }
+      
+      .card-info h2 { 
+        font-size: 1.8rem; 
+        margin-bottom: 16px; 
+        line-height: 1.2; /* Зменшено міжрядковий інтервал для мобільних */
+      }
     }
 
     .card-info h2 { font-size: 2.2rem; margin-bottom: 20px; letter-spacing: -0.02em; }
     .card-info p { color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; font-size: 1.05rem; }
-    
+     
     .tag {
       display: inline-block; padding: 5px 10px; 
       font-size: 0.7rem; font-family: var(--font-tech); font-weight: 700;
@@ -252,13 +258,13 @@
       display: flex; align-items: center; gap: 12px;
       margin-bottom: 12px; color: var(--text-main); font-weight: 600; font-size: 0.95rem;
     }
-    
+     
     .progress-track {
       height: 14px; background: #e5e5e5; border: 1px solid #d4d4d4;
       border-radius: var(--radius-none); overflow: hidden; margin: 20px 0;
     }
     .progress-bar { height: 100%; width: 0%; transition: width 1.5s ease; background: var(--active-color); }
-    
+     
     .btn-donate {
       width: 100%; padding: 18px; 
       border: 2px solid transparent; border-radius: var(--radius-none);
@@ -321,7 +327,7 @@
     @media (max-width: 768px) { .social-section { padding: 50px 0; } }
 
     .social-header { text-align: center; margin-bottom: 40px; font-size: 1.8rem; }
-    
+     
     .social-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px; justify-content: center;
@@ -334,9 +340,9 @@
       transition: 0.3s;
     }
     .social-card:hover { border-color: var(--border-strong); transform: translateY(-4px); box-shadow: var(--shadow-sharp); }
-    
+     
     .brand-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-    
+     
     .link-list a {
       display: flex; align-items: center; gap: 12px;
       padding: 12px; margin-bottom: 8px; 
@@ -426,7 +432,7 @@
     </div>
 
     <div class="content-wrapper">
-      
+       
       <div id="card-army" class="project-card active">
         <div class="card-layout">
           <div class="card-info">
@@ -449,11 +455,11 @@
               <span style="font-weight:700; font-size:1.1rem; font-family: var(--font-head);">Бюджет</span>
               <span class="text-tech" style="color:var(--text-main); font-weight:700;">0 ₴</span>
             </div>
-            
+             
             <div class="progress-track">
               <div class="progress-bar" style="width: 1%;"></div>
             </div>
-            
+             
             <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted);">
               <span>Ціль: 50 000 ₴</span>
               <span style="font-weight:700; color: var(--active-color);">1%</span>
@@ -465,17 +471,17 @@
 
             <div class="req-block">
                 <div class="req-title">Реквізити (UAH):</div>
-                
+                 
                 <div class="req-row">
                     <span>Отримувач:</span>
                     <strong>БФ СВІТОГЛЯД БО</strong>
                 </div>
-                
+                 
                 <div class="req-row">
                     <span>ЄДРПОУ:</span>
                     <strong class="text-tech">44659520</strong>
                 </div>
-                
+                 
                 <div class="req-row">
                     <span>Банк:</span>
                     <strong>УНІВЕРСАЛ БАНК</strong>
@@ -485,7 +491,7 @@
                     <span>IBAN:</span>
                     <strong class="text-tech">UA453220010000026008700007173</strong>
                 </div>
-                
+                 
                 <div class="req-row">
                     <span>Призначення:</span>
                     <strong>Благодійний внесок</strong>
@@ -515,11 +521,11 @@
               <span style="font-weight:700; font-size:1.1rem; font-family: var(--font-head);">Зібрано</span>
               <span class="text-tech" style="color:var(--text-main); font-weight:700;">36 400 ₴</span>
             </div>
-            
+             
             <div class="progress-track">
               <div class="progress-bar" style="width: 72%;"></div>
             </div>
-            
+             
             <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--text-muted);">
               <span>Ціль: 50 000 ₴</span>
               <span style="font-weight:700; color: var(--active-color);">72%</span>
@@ -538,9 +544,9 @@
   <section class="social-section">
     <div class="container">
       <h2 class="social-header">Спільнота та Зв'язок</h2>
-      
+       
       <div class="social-grid">
-        
+         
         <div class="social-card">
           <div class="brand-title">
             <i class="ph-fill ph-cube" style="color: var(--color-army);"></i> Craftorium
@@ -590,7 +596,7 @@
     function setMode(mode) {
       const body = document.body;
       const logoIcon = document.getElementById('logoIcon');
-      
+       
       // 1. Зміна класу Body (змінює CSS змінні кольорів автоматично)
       body.classList.remove('mode-books', 'mode-army');
       body.classList.add('mode-' + mode);
@@ -601,7 +607,7 @@
 
       document.querySelectorAll('.project-card').forEach(card => card.classList.remove('active'));
       document.getElementById('card-' + mode).classList.add('active');
-      
+       
       // 3. Зміна кольору лого (SVG)
       const activeColor = (mode === 'army') ? 'var(--color-army)' : 'var(--color-books)';
       logoIcon.style.color = activeColor;
@@ -638,7 +644,7 @@
     document.addEventListener("DOMContentLoaded", () => {
       const plasticEl = document.getElementById("plastic-counter");
       if(plasticEl) animateValue(plasticEl, 0, 196, 2000);
-      
+       
       // Ініціалізація кольору лого при завантаженні
       const isArmy = document.body.classList.contains('mode-army');
       const logoIcon = document.getElementById('logoIcon');
